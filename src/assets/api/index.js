@@ -7,12 +7,12 @@ import {
 
 export default {
   $$path: {
-    getpcbanners: 'http://10.5.130.191:3000/banner',
-    getintroduceplaylist: 'http://10.5.130.191:3000/personalized',
-    getintroducealbumlist: 'http://10.5.130.191:3000/top/album',
-    gettopmusiclist: 'http://10.5.130.191:3000/top/list',
-    getmusicdetail: 'http://10.5.130.191:3000/song/url',
-    getmusiclyricbyid: 'http://10.5.130.191:3000/lyric'
+    getpcbanners: 'http://127.0.0.1:3000/banner',
+    getintroduceplaylist: 'http://127.0.0.1:3000/personalized',
+    getintroducealbumlist: 'http://127.0.0.1:3000/top/album',
+    gettopmusiclist: 'http://127.0.0.1:3000/top/list',
+    getmusicdetail: 'http://127.0.0.1:3000/song/url',
+    getmusiclyricbyid: 'http://127.0.0.1:3000/lyric'
   },
   //   推荐页面banner
   getPCBannersList (params) {

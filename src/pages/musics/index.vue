@@ -8,6 +8,7 @@
           <h3>{{topInfo.name}}</h3>
           <p class="description">{{topInfo.description}}</p>
           <p class="time">
+            最近更新
             <i class="iconfont icon-shijian"></i>
             <span>{{getDate()}}</span>
           </p>
@@ -151,7 +152,6 @@ export default {
         const data = res.data.playlist.tracks
         this.data = data
         this.topInfo = {}
-        console.log('res.data.playlist', res.data.playlist)
         this.topInfo = Object.assign(this.topInfo, {
           name: res.data.playlist.name,
           coverImgUrl: res.data.playlist.coverImgUrl,

@@ -21,11 +21,28 @@ const routes = [{
     }
   },
   {
-    path: '/home/order',
-    component: () => import('../pages/order/index.vue'),
-    meta: {
-      name: '订单管理'
-    }
+    path: '/home/singer',
+    component: () => import('../pages/singer/index.vue'),
+    children: [
+      {
+        path: '/home/singer/main',
+        component: () => import('../pages/singer/main.vue'),
+        meta: {
+          name: '歌手'
+        }
+      },
+      {
+        path: '/home/singer/detail/:id',
+        component: () => import('../pages/singer/total.vue'),
+        meta: {
+          name: '歌手'
+        }
+      },
+      {
+        path: '/home/singer',
+        redirect: '/home/singer/main'
+      }
+    ]
   },
   {
     path: '/home',

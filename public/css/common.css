@@ -1,0 +1,17 @@
+.common-wrapper {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.frs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.frstart {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}

@@ -10,11 +10,15 @@ export default {
     getpcbanners: 'http://localhost:3000/banner',
     getintroduceplaylist: 'http://localhost:3000/personalized',
     getintroducealbumlist: 'http://localhost:3000/top/album',
-    gettopmusiclist: 'http:/localhost:3000/top/list',
+    gettopmusiclist: 'http://localhost:3000/top/list',
     getmusicdetail: 'http://localhost:3000/song/url',
     getmusiclyricbyid: 'http://localhost:3000/lyric',
     getsingerlistbycat: 'http://localhost:3000/artist/list',
-    gethotsingerlist: 'http://localhost:3000/top/artists'
+    gethotsingerlist: 'http://localhost:3000/top/artists',
+    getsingerdescbyid: 'http://localhost:3000/artist/desc',
+    getsingerartist: 'http://localhost:3000/artists',
+    getsingermvlist: 'http://localhost:3000/artist/mv',
+    getmvdetailbyid: 'http://localhost:3000/mv/detail'
   },
   //   推荐页面banner
   getPCBannersList (params) {
@@ -47,5 +51,21 @@ export default {
   //    获取热门歌手
   getHotSingerList (params) {
     return getRequest(this.$$path.gethotsingerlist, params)
+  },
+  //    根据id获取歌手描述
+  getSingerDescbyId (params) {
+    return getRequest(this.$$path.getsingerdescbyid, params)
+  },
+  //    根据id获取歌手单曲
+  getSingerArtist (params) {
+    return getRequest(this.$$path.getsingerartist, params)
+  },
+  //    根据id获取歌手单曲
+  getSingerMVList (params) {
+    return getRequest(this.$$path.getsingermvlist, params)
+  },
+  //    根据id获取歌手单曲
+  getMvDetailByd (params) {
+    return getRequest(this.$$path.getmvdetailbyid, params)
   }
 }

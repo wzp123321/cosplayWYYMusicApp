@@ -12,10 +12,7 @@
       </a-list>
     </div>
     <div class="table-wrap">
-      <div class="frs">
-        <h1 class="title">入驻歌手</h1>
-        <h6 @click="handleTypeChange('5001')">查看全部>>></h6>
-      </div>
+      <h1 class="title">入驻歌手</h1>
       <div class="intro-play-list">
         <SingerItem
           v-for="(singerItem,index) in liveSingerList"
@@ -59,7 +56,7 @@ export default {
   methods: {
     handleTypeChange (key) {
       this.singerKey = key
-      this.$router.push(`/home/singer/detail/${key}`)
+      this.$router.push(`/home/singer/total/${key}`)
     },
     // 入驻歌手
     async getSingerList () {

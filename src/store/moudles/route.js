@@ -5,7 +5,7 @@ const route = {
       title: '推荐'
     },
     {
-      path: '/home/singer',
+      path: '/home/singer/main',
       title: '歌手'
     },
     {

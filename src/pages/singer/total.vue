@@ -1,6 +1,6 @@
 <template>
   <div class="intro-play-list">
-    <SingerItem v-for="(singerItem,index) in singList" :singerInfo="singerItem" :key="index"></SingerItem>
+    <SingerItem v-for="(singerItem,index) in singList" :width="160" :height="220" :singerInfo="singerItem" :key="index"></SingerItem>
   </div>
 </template>
 <script>

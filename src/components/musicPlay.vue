@@ -28,7 +28,9 @@ export default {
     }
   },
   methods: {
-    closeMusic () {}
+    closeMusic () {
+      this.$emit('close')
+    }
   }
 }
 </script>

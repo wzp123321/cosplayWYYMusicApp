@@ -1,6 +1,6 @@
 <template>
-  <div class="album-wrap">
-    <img :src="singerInfo.picUrl " style="width:100%;height:180px" />
+  <div class="album-wrap" :style="`width:${width}px;height:${height}px`">
+    <img :src="singerInfo.picUrl " :style="`width:100%;height:${width}px`" @click="getSingerInfo(singerInfo.id)"/>
     <p>{{singerInfo.name}}</p>
     <div style="text-align:left;margin-left:5px"><a-tag v-for="(item,index) in singerInfo.alias" :key="index" color="pink">{{item}}</a-tag></div>
   </div>
@@ -16,14 +16,25 @@ export default {
   props: {
     singerInfo: {
       type: Object
+    },
+    width: {
+      type: Number,
+      default: 180
+    },
+    height: {
+      type: Number,
+      default: 240
+    }
+  },
+  methods: {
+    getSingerInfo (id) {
+      this.$router.push('/home/singer/detail/' + id)
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .album-wrap {
-  width: 180px;
-  height: 240px;
   margin-right: 20px;
   margin-bottom: 10px;
   border: 1px solid #eee;

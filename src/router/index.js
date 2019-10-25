@@ -28,14 +28,28 @@ const routes = [{
         path: '/home/singer/main',
         component: () => import('../pages/singer/main.vue'),
         meta: {
-          name: '歌手'
+          name: '歌手预览'
+        }
+      },
+      {
+        path: '/home/singer/total/:id',
+        component: () => import('../pages/singer/total.vue'),
+        meta: {
+          name: '歌手总览'
         }
       },
       {
         path: '/home/singer/detail/:id',
-        component: () => import('../pages/singer/total.vue'),
+        component: () => import('../pages/singer/singerinfo.vue'),
         meta: {
-          name: '歌手'
+          name: '歌手详情'
+        }
+      },
+      {
+        path: '/home/mv/detail/:id',
+        component: () => import('../pages/singer/mvdetail.vue'),
+        meta: {
+          name: 'mv详情'
         }
       },
       {

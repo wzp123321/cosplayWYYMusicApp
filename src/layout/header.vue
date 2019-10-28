@@ -8,7 +8,7 @@
         @click="routeToPage(routeItem.path)"
       >{{routeItem.title}}</a-menu-item>
     </a-menu>
-    <a-input-search class="search-input" placeholder="请输入歌曲名或歌手搜索"></a-input-search>
+    <a-input-search @search="searInput" class="search-input" placeholder="请输入歌曲名或歌手搜索"></a-input-search>
   </div>
 </template>
 <script>
@@ -29,6 +29,9 @@ export default {
   methods: {
     routeToPage (path) {
       this.$router.push(path)
+    },
+    searInput(value){
+      this.$router.push('/home/search/'+encodeURIComponent(value));
     }
   }
 }

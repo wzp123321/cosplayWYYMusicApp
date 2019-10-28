@@ -7,7 +7,7 @@ const BASE_URL = 'http://127.0.0.1:9898'
 const axiosInstance = () => {
   const instance = axios.create({
     baseURL: BASE_URL,
-    timeout: 10 * 60 * 1000
+    timeout: 10 * 60 * 1000,
   })
   return instance
 }

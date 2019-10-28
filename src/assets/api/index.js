@@ -18,54 +18,74 @@ export default {
     getsingerdescbyid: 'http://localhost:3000/artist/desc',
     getsingerartist: 'http://localhost:3000/artists',
     getsingermvlist: 'http://localhost:3000/artist/mv',
-    getmvdetailbyid: 'http://localhost:3000/mv/detail'
+    getmvdetailbyid: 'http://localhost:3000/mv/detail',
+    getmvcomment: 'http://localhost:3000/comment/mv',
+    getdjbannerlist: 'http://localhost:3000/dj/banner',
+    gethotdjlist: 'http://localhost:3000/dj/hot',
+    getsearchdata: 'http://localhost:3000/search'
   },
   //   推荐页面banner
-  getPCBannersList (params) {
+  getPCBannersList(params) {
     return getRequest(this.$$path.getpcbanners, params)
   },
   //   推荐歌单
-  getIntroPlayList (params) {
+  getIntroPlayList(params) {
     return getRequest(this.$$path.getintroduceplaylist, params)
   },
   //    新碟上市
-  getAlbumList (params) {
+  getAlbumList(params) {
     return getRequest(this.$$path.getintroducealbumlist, params)
   },
   //    获取排行榜歌曲列表
-  getTopMusicList (params) {
+  getTopMusicList(params) {
     return getRequest(this.$$path.gettopmusiclist, params)
   },
   //    根据id获取歌曲详细信息
-  getMusicInfoById (params) {
+  getMusicInfoById(params) {
     return getRequest(this.$$path.getmusicdetail, params)
   },
   //    根据id获取歌曲歌词
-  getMusicLyricById (params) {
+  getMusicLyricById(params) {
     return getRequest(this.$$path.getmusiclyricbyid, params)
   },
   //    获取入驻歌手
-  getSingerListByCat (params) {
+  getSingerListByCat(params) {
     return getRequest(this.$$path.getsingerlistbycat, params)
   },
   //    获取热门歌手
-  getHotSingerList (params) {
+  getHotSingerList(params) {
     return getRequest(this.$$path.gethotsingerlist, params)
   },
   //    根据id获取歌手描述
-  getSingerDescbyId (params) {
+  getSingerDescbyId(params) {
     return getRequest(this.$$path.getsingerdescbyid, params)
   },
   //    根据id获取歌手单曲
-  getSingerArtist (params) {
+  getSingerArtist(params) {
     return getRequest(this.$$path.getsingerartist, params)
   },
   //    根据id获取歌手单曲
-  getSingerMVList (params) {
+  getSingerMVList(params) {
     return getRequest(this.$$path.getsingermvlist, params)
   },
   //    根据id获取歌手单曲
-  getMvDetailByd (params) {
+  getMvDetailByd(params) {
     return getRequest(this.$$path.getmvdetailbyid, params)
+  },
+  //    根据id获取mv评论
+  getMvCommentByid(params) {
+    return getRequest(this.$$path.getmvcomment, params)
+  },
+  //    获取电台banner
+  getDJBannerList(params) {
+    return getRequest(this.$$path.getdjbannerlist, params)
+  },
+  //    获取热门电台
+  getHotDJList(params) {
+    return getRequest(this.$$path.gethotdjlist, params)
+  },
+  //    搜索
+  getSearchData(params) {
+    return getRequest(this.$$path.getsearchdata, params)
   }
 }

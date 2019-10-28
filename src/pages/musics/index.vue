@@ -10,20 +10,20 @@
           <p class="time">
             最近更新
             <i class="iconfont icon-shijian"></i>
-            <span>{{getDate()}}</span>
+            <span>{{getDate() || ' '}}</span>
           </p>
           <div>
             <span>
               <i class="iconfont icon-bofang"></i>
-              {{topInfo.playCount}}
+              {{topInfo.playCount || 0}}
             </span>
             <span class="count">
               <i class="iconfont icon-fenxiang"></i>
-              {{topInfo.shareCount}}
+              {{topInfo.shareCount || 0}}
             </span>
             <span>
               <i class="iconfont icon-pinglun"></i>
-              {{topInfo.commentCount}}
+              {{topInfo.commentCount || 0}}
             </span>
           </div>
         </div>

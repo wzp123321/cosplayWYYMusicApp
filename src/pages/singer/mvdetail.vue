@@ -42,10 +42,32 @@
     <div style="margin-top:50px">
       <h1>概述</h1>
       <div style="background:#eee;width:900px">{{mvInfo.desc || '暂无描述'}}</div>
+      <h1>评论</h1>
+      <div>
+        <!-- <a-list
+          class="comment-list"
+          :header="`${data.length} replies`"
+          itemLayout="horizontal"
+          :dataSource="data"
+        >
+          <a-list-item slot="renderItem" slot-scope="item, index">
+            <a-comment :author="item.author" :avatar="item.avatar">
+              <template slot="actions">
+                <span v-for="action in item.actions">{{action}}</span>
+              </template>
+              <p slot="content">{{item.content}}</p>
+              <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
+                <span>{{item.datetime.fromNow()}}</span>
+              </a-tooltip>
+            </a-comment>
+          </a-list-item>
+        </a-list> -->
+      </div>
     </div>
   </div>
 </template>
 <script>
+import moment from 'moment'
 import HttpApi from '../../assets/api/index'
 import { formatDuring } from '../../utils/formatDate'
 import { videoPlayer } from 'vue-video-player'
@@ -57,8 +79,10 @@ export default {
   },
   data() {
     return {
+      moment,
       mvInfo: {},
-      playerOptions: {}
+      playerOptions: {},
+      comments:[]
     }
   },
   methods: {
@@ -96,10 +120,18 @@ export default {
     },
     getDate(time) {
       return formatDuring(time)
+    },
+    async getComment(){ 
+      const res = await HttpApi.getMvCommentByid({id:this.$route.params.id})
+      if(res && res.data){
+        const comments = res.data.comments
+        this.comments = comments
+      }
     }
   },
   created() {
     this.getMvDetail()
+    this.getComment()
   }
 }
 </script>

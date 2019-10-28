@@ -23,6 +23,6 @@ export const formatDuring = (time) => {
   return (
     (hours > 0 ? hours + ':' : '') +
     (minutes > 0 ? minutes + ':' : '') +
-    (seconds > 0 ? (seconds < 10 ? '0' + seconds : seconds) : '00')
+    (seconds > 0 ? (seconds < 10 ? '0' + seconds : Math.floor(seconds)) : '00')
   )
 }

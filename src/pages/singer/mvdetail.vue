@@ -42,26 +42,21 @@
     <div style="margin-top:50px">
       <h1>概述</h1>
       <div style="background:#eee;width:900px">{{mvInfo.desc || '暂无描述'}}</div>
-      <h1>评论</h1>
+      <h1 style="margin-top:30px">评论</h1>
       <div>
-        <!-- <a-list
+        <a-list
           class="comment-list"
-          :header="`${data.length} replies`"
+          :header="`${comments.length}条评论`"
           itemLayout="horizontal"
-          :dataSource="data"
+          :dataSource="comments"
         >
-          <a-list-item slot="renderItem" slot-scope="item, index">
-            <a-comment :author="item.author" :avatar="item.avatar">
-              <template slot="actions">
-                <span v-for="action in item.actions">{{action}}</span>
-              </template>
+          <a-list-item slot="renderItem" slot-scope="item, index" :key="index">
+            <a-comment :author="item.user.nickname" :avatar="item.user.avatarUrl">
               <p slot="content">{{item.content}}</p>
-              <a-tooltip slot="datetime" :title="item.datetime.format('YYYY-MM-DD HH:mm:ss')">
-                <span>{{item.datetime.fromNow()}}</span>
-              </a-tooltip>
+              <span>{{formattime(item.time)}}</span>
             </a-comment>
           </a-list-item>
-        </a-list> -->
+        </a-list>
       </div>
     </div>
   </div>
@@ -69,20 +64,24 @@
 <script>
 import moment from 'moment'
 import HttpApi from '../../assets/api/index'
-import { formatDuring } from '../../utils/formatDate'
+import { formatDuring, updateTime } from '../../utils/formatDate'
 import { videoPlayer } from 'vue-video-player'
+import { List, Comment } from 'ant-design-vue'
 import 'video.js/dist/video-js.css'
 export default {
   name: 'MvDetail',
   components: {
-    'video-player': videoPlayer
+    'video-player': videoPlayer,
+    'a-list': List,
+    'a-list-item': List.Item,
+    'a-comment': Comment
   },
   data() {
     return {
       moment,
       mvInfo: {},
       playerOptions: {},
-      comments:[]
+      comments: []
     }
   },
   methods: {
@@ -121,9 +120,13 @@ export default {
     getDate(time) {
       return formatDuring(time)
     },
-    async getComment(){ 
-      const res = await HttpApi.getMvCommentByid({id:this.$route.params.id})
-      if(res && res.data){
+    formattime(time) {
+      return updateTime(time)
+    },
+    // 获取mv评论
+    async getCommentList() {
+      const res = await HttpApi.getMvCommentByid({ id: this.$route.params.id })
+      if (res && res.data) {
         const comments = res.data.comments
         this.comments = comments
       }
@@ -131,7 +134,7 @@ export default {
   },
   created() {
     this.getMvDetail()
-    this.getComment()
+    this.getCommentList()
   }
 }
 </script>

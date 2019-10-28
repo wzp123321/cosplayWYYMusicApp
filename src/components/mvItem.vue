@@ -1,6 +1,6 @@
 <template>
   <div class="album-wrap">
-    <img :src="mvInfo.imgurl " @click="toMvDetail(mvInfo.id)" />
+    <img :src="mvInfo.imgurl||mvInfo.cover" @click="toMvDetail(mvInfo.id)" @error="handleError"/>
     <h5 class="title">{{mvInfo.name}}</h5>
     <div class="name frs">
       <h5>{{mvInfo.artistName}}</h5>
@@ -31,6 +31,9 @@ export default {
     },
     getDate(time){
         return formatDuring(time)
+    },
+     handleError(e) {
+      e.target.src = reqiure('../assets/imgs/default.png')
     }
   }
 }

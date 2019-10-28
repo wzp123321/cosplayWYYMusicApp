@@ -1,6 +1,6 @@
 <template>
   <div class="playlist-wrap">
-    <img :src="playListInfo.picUrl" style="width:100%;height:180px" />
+    <img :src="playListInfo.picUrl" style="width:100%;height:180px" @error="handleError"/>
     <div class="playlist-content">
       <span class="title">{{playListInfo.name}}</span>
     </div>
@@ -22,6 +22,11 @@ export default {
   props: {
     playListInfo: {
       type: Object
+    }
+  },
+  methods: {
+     handleError(e) {
+      e.target.src = reqiure('../assets/imgs/default.png')
     }
   },
   created () {}

@@ -19,10 +19,11 @@ export default {
     getsingerartist: 'http://localhost:3000/artists',
     getsingermvlist: 'http://localhost:3000/artist/mv',
     getmvdetailbyid: 'http://localhost:3000/mv/detail',
-    getmvcomment: 'http://localhost:3000/comment/mv',
+    getmvcommentlist: 'http://localhost:3000/comment/mv',
     getdjbannerlist: 'http://localhost:3000/dj/banner',
     gethotdjlist: 'http://localhost:3000/dj/hot',
-    getsearchdata: 'http://localhost:3000/search'
+    getsearchdata: 'http://localhost:3000/search',
+    getmvbytypearea : 'http://localhost:3000/mv/all'
   },
   //   推荐页面banner
   getPCBannersList(params) {
@@ -74,7 +75,7 @@ export default {
   },
   //    根据id获取mv评论
   getMvCommentByid(params) {
-    return getRequest(this.$$path.getmvcomment, params)
+    return getRequest(this.$$path.getmvcommentlist, params)
   },
   //    获取电台banner
   getDJBannerList(params) {
@@ -87,5 +88,9 @@ export default {
   //    搜索
   getSearchData(params) {
     return getRequest(this.$$path.getsearchdata, params)
-  }
+  },
+  //    根据地区 类型获取mv
+  getMvListByAreaType(params) {
+    return getRequest(this.$$path.getmvbytypearea, params)
+  },
 }

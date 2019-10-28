@@ -65,6 +65,10 @@ const routes = [{
         ]
       },
       {
+        path: '/home/mv',
+        component: () => import('../pages/mvpage/index.vue')
+      },
+      {
         path: '/home/search/:key',
         component: () => import('../pages/serachPage/index.vue')
       },

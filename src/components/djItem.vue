@@ -1,6 +1,6 @@
 <template>
   <div class="album-wrap">
-    <img :src="djInfo.picUrl " style="width:100%;height:160px" />
+    <img :src="djInfo.picUrl " style="width:100%;height:160px" @error="handleError" />
     <h5>{{djInfo.name}}</h5>
     <h5 class="rcmdtext">{{djInfo.rcmdtext}}</h5>
   </div>
@@ -12,6 +12,11 @@ export default {
   props: {
     djInfo: {
       type: Object
+    }
+  },
+  methods: {
+    handleError(e) {
+      e.target.src = reqiure('../assets/imgs/default.png')
     }
   }
 }

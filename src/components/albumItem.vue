@@ -1,6 +1,6 @@
 <template>
   <div class="album-wrap">
-    <img :src="albumInfo.blurPicUrl " style="width:100%;height:180px" />
+    <img :src="albumInfo.blurPicUrl " style="width:100%;height:180px" @error="handleError" />
     <h5>{{albumInfo.name}}</h5>
     <h5>{{albumInfo.artist.name}}</h5>
     <div class="icondiv">
@@ -15,6 +15,11 @@ export default {
   props: {
     albumInfo: {
       type: Object
+    }
+  },
+  methods: {
+    handleError(e) {
+      e.target.src = reqiure('../assets/imgs/default.png')
     }
   }
 }

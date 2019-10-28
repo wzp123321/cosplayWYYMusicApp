@@ -1,8 +1,15 @@
 <template>
   <div class="album-wrap" :style="`width:${width}px;height:${height}px`">
-    <img :src="singerInfo.picUrl " :style="`width:100%;height:${width}px`" @click="getSingerInfo(singerInfo.id)"/>
+    <img
+      :src="singerInfo.picUrl "
+      :style="`width:100%;height:${width}px`"
+      @click="getSingerInfo(singerInfo.id)"
+      @error="handleError"
+    />
     <p>{{singerInfo.name}}</p>
-    <div style="text-align:left;margin-left:5px"><a-tag v-for="(item,index) in singerInfo.alias" :key="index" color="pink">{{item}}</a-tag></div>
+    <div style="text-align:left;margin-left:5px">
+      <a-tag v-for="(item,index) in singerInfo.alias" :key="index" color="pink">{{item}}</a-tag>
+    </div>
   </div>
 </template>
 <script>
@@ -27,8 +34,11 @@ export default {
     }
   },
   methods: {
-    getSingerInfo (id) {
+    getSingerInfo(id) {
       this.$router.push('/home/singer/detail/' + id)
+    },
+    handleError(e) {
+      e.target.src = reqiure('../assets/imgs/default.png')
     }
   }
 }
@@ -41,7 +51,7 @@ export default {
   border-radius: 5px;
   position: relative;
   color: #000;
-  p{
+  p {
     text-align: left;
     margin: 5px 0 5px 10px;
   }

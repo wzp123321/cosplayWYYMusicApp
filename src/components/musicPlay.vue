@@ -1,36 +1,71 @@
 <template>
-  <vue-drag-resize :isActive="true" :isDraggable="true" class="play-wrap">
+  <div class="play-wrap">
     <a-player
+      :showLrc="true"
+      mode="single"
+      @error="playError"
+      @ended="palyEnd"
       autoplay
       :music="{
         title: musicInfo.musicName,
         author: musicInfo.author,
         url: musicInfo.url,
         pic: musicInfo.picUrl,
-        lrc: musicInfo.lyric
+        lrc: lyric
     }"
     ></a-player>
     <i class="iconfont icon-guanbi" @click="closeMusic"></i>
-  </vue-drag-resize>
+  </div>
 </template>
 <script>
+import HttpApi from '../assets/api/index'
+import { message } from 'ant-design-vue'
 import VueAplayer from 'vue-aplayer'
-import VueDragResize from 'vue-drag-resize'
 export default {
   name: 'MusicPlay',
   components: {
     'a-player': VueAplayer,
-    'vue-drag-resize': VueDragResize
+    message
   },
   props: {
     musicInfo: {
       type: Object
     }
   },
-  methods: {
-    closeMusic () {
-      this.$emit('close')
+  data() {
+    return {
+      lyric: ''
     }
+  },
+  methods: {
+    closeMusic() {
+      this.$emit('close')
+    },
+    palyEnd() {
+      this.$emit('playEnd', this.musicInfo)
+    },
+    playError() {
+      this.$message.error('播放错误')
+    },
+    async getLrc() {
+      const id = this.musicInfo.id
+      const res = await HttpApi.getMusicLyricById({ id })
+      if (res && res.data) {
+        const lyric = res.data.lrc.lyric
+        this.lyric = lyric
+      }
+    }
+  },
+  watch:{
+    musicInfo:function(newVal,oldVal){
+      this.getLrc();
+    }
+  },
+  created() {
+    this.$nextTick(() => {
+      this.getLrc()
+    })
+    console.log(this.musicInfo)
   }
 }
 </script>

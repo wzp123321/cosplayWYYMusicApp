@@ -1,36 +1,55 @@
 <template>
   <div>
-    <a-table :columns="columns" :dataSource="songs" :rowKey="rowKey=>rowKey.id">
-      <span slot="singer" slot-scope="text,record">{{record.artists[0].name}}</span>
-      <span slot="img" slot-scope="text,record">
-        <img :src="record.artists[0].img1v1Url" style="width:60px;height:60px" alt />
-      </span>
-      <span slot="time" slot-scope="text,record">{{getDate(record.duration)}}</span>
-      <span slot="action" slot-scope="text,record">
-        <i
-          class="iconfont icon-bofang"
-          @click="playMusic(record.id,record.name,record.artists[0].name,record.artists[0].img1v1Url)"
-        ></i>
-      </span>
-    </a-table>
-    <MusicPlay :musicInfo="musicInfo" v-if="JSON.stringify(musicInfo) !== '{}'" @close="closeMusic"></MusicPlay>
+    <a-tabs defaultActiveKey="1" @change="callback">
+      <a-tab-pane tab="单曲" key="1">
+        <a-table :columns="columns" :dataSource="songs" :rowKey="rowKey=>rowKey.id">
+          <span slot="singer" slot-scope="text,record">{{record.artists[0].name}}</span>
+          <span slot="img" slot-scope="text,record">
+            <img :src="record.artists[0].img1v1Url" style="width:60px;height:60px" alt />
+          </span>
+          <span slot="time" slot-scope="text,record">{{getDate(record.duration)}}</span>
+          <span slot="action" slot-scope="text,record">
+            <i
+              class="iconfont icon-bofang"
+              @click="playMusic(record.id,record.name,record.artists[0].name,record.artists[0].img1v1Url)"
+            ></i>
+          </span>
+        </a-table>
+      </a-tab-pane>
+      <a-tab-pane tab="mv" key="2" forceRender>
+        <div style="display:flex;flex-wrap:wrap">
+          <MVItem v-for="(mvItem,index) in mvs" :key="index" :mvInfo="mvItem"></MVItem>
+        </div>
+      </a-tab-pane>
+    </a-tabs>
+    <MusicPlay
+      @playEnd="playEnd"
+      :musicInfo="musicInfo"
+      v-if="JSON.stringify(musicInfo) !== '{}'"
+      @close="closeMusic"
+    ></MusicPlay>
   </div>
 </template>
 <script>
 import HttpApi from '../../assets/api/index'
-import { Table } from 'ant-design-vue'
+import { Table, Tabs } from 'ant-design-vue'
 import { formatDuring } from '../../utils/formatDate'
 import MusicPlay from '../../components/musicPlay'
+import MVItem from '../../components/mvItem'
 export default {
   name: 'SearchPage',
   components: {
     'a-table': Table,
-    MusicPlay
+    'a-tabs': Tabs,
+    'a-tab-pane': Tabs.TabPane,
+    MusicPlay,
+    MVItem
   },
   data() {
     return {
       songs: [],
       musicInfo: {},
+      mvs: [],
       columns: [
         {
           key: 'sort',
@@ -71,6 +90,11 @@ export default {
     }
   },
   methods: {
+    // 播放完成
+    playEnd(obj) {
+      this.musicInfo = obj
+    },
+    callback(key) {},
     async getSearchData() {
       const keywords = this.$route.params.key
       const res = await HttpApi.getSearchData({
@@ -79,6 +103,15 @@ export default {
       if (res && res.data) {
         const songs = res.data.result.songs
         this.songs = songs
+      }
+
+      const resa = await HttpApi.getSearchData({
+        keywords,
+        type: '1004'
+      })
+      if (resa && resa.data) {
+        const mvs = resa.data.result.mvs
+        this.mvs = mvs
       }
     },
     getDate(time) {
@@ -98,7 +131,7 @@ export default {
   // 监视路由变化
   watch: {
     $route(newVal, oldVal) {
-     this.getSearchData()
+      this.getSearchData()
     }
   },
   created() {

@@ -1,13 +1,13 @@
 <template>
   <div class="album-wrap">
-    <img :src="mvInfo.imgurl||mvInfo.cover" @click="toMvDetail(mvInfo.id)" @error="handleError"/>
-    <h5 class="title">{{mvInfo.name}}</h5>
+    <img :src="mvInfo.imgurl||mvInfo.cover||mvInfo.coverUrl" @click="toMvDetail(mvInfo.id||mvInfo.vid)" @error="handleError"/>
+    <h5 class="title">{{mvInfo.name|| mvInfo.title}}</h5>
     <div class="name frs">
-      <h5>{{mvInfo.artistName}}</h5>
-      <h5>{{mvInfo.publishTime}}</h5>
+      <h5>{{mvInfo.artistName || mvInfo.creator.userName}}</h5>
+      <h5>{{mvInfo.publishTime||''}}</h5>
     </div>
     <div class="icondiv frs">
-      <div>{{getDate(mvInfo.duration)}}</div>
+      <div>{{getDate(mvInfo.duration || mvInfo.durationms)}}</div>
       <div>
         <i class="iconfont icon-bofang"></i>
         {{mvInfo.playCount}}

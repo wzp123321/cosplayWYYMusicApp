@@ -51,7 +51,12 @@
         </span>
       </a-table>
     </div>
-    <MusicPlay :musicInfo="musicInfo" v-if="JSON.stringify(musicInfo) !== '{}'" @close="closeMusic"></MusicPlay>
+    <MusicPlay
+      :musicInfo="musicInfo"
+      v-if="JSON.stringify(musicInfo) !== '{}'"
+      @close="closeMusic"
+      @playEnd="playEnd"
+    ></MusicPlay>
   </div>
 </template>
 <script>
@@ -67,7 +72,7 @@ export default {
     'a-table': Table,
     MusicPlay
   },
-  data () {
+  data() {
     return {
       musicInfo: {},
       columns: [
@@ -113,12 +118,15 @@ export default {
     }
   },
   methods: {
-    musicSearch (idx) {
+    musicSearch(idx) {
       this.idx = idx
       this.getMusicList()
     },
+    playEnd(obj) {
+      this.musicInfo = obj
+    },
     // 点击根据id获取歌曲信息
-    async playMusic (id, musicName, author, picUrl) {
+    async playMusic(id, musicName, author, picUrl) {
       const res = await HttpApi.getMusicInfoById({ id })
       if (res && res.data) {
         const dataSource = res.data.data[0]
@@ -133,7 +141,7 @@ export default {
     },
 
     //  根据id获取歌词
-    async getLyricById (id) {
+    async getLyricById(id) {
       const res = await HttpApi.getMusicLyricById({ id })
       if (res && res.data) {
         const lyric = res.data.lrc.lyric
@@ -141,11 +149,11 @@ export default {
       }
     },
     // 关闭
-    closeMusic () {
+    closeMusic() {
       this.musicInfo = {}
     },
     // 请求数据
-    async getMusicList () {
+    async getMusicList() {
       // 这个接口是获取各个榜单的歌曲列表
       const res = await HttpApi.getTopMusicList({ idx: this.idx })
       if (res && res.data) {
@@ -164,11 +172,11 @@ export default {
         })
       }
     },
-    getDate () {
+    getDate() {
       return formatDate(this.topInfo.trackUpdateTime)
     }
   },
-  async created () {
+  async created() {
     await this.getMusicList()
   }
 }

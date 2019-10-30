@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     handleError(e) {
-      e.target.src = reqiure('../assets/imgs/default.png')
+      e.target.src = reqiure('@/assets/imgs/default.png')
     }
   }
 }

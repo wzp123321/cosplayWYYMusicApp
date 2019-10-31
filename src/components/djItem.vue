@@ -1,22 +1,21 @@
 <template>
   <div class="album-wrap">
-    <img :src="djInfo.picUrl " style="width:100%;height:160px" @error="handleError" />
+    <CommonImg :src="djInfo.picUrl " :width="160"/>
     <h5>{{djInfo.name}}</h5>
     <h5 class="rcmdtext">{{djInfo.rcmdtext}}</h5>
   </div>
 </template>
 <script>
+import CommonImg from './CommonIMG'
 // 歌单组件
 export default {
   name: 'DJItem',
+  components: {
+    CommonImg
+  },
   props: {
     djInfo: {
       type: Object
-    }
-  },
-  methods: {
-    handleError(e) {
-      e.target.src = reqiure('../assets/imgs/default.png')
     }
   }
 }

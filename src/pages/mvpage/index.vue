@@ -22,8 +22,9 @@
 </template>
 <script>
 import { List, Pagination } from 'ant-design-vue'
-import MVItem from '../../components/mvItem'
-import HttpApi from '../../assets/api/index'
+import MVItem from '@/components/MvItem'
+import HttpApi from '@/assets/api/index'
+
 export default {
   name: 'MvPage',
   components: {

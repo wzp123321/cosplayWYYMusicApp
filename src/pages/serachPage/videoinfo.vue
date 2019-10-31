@@ -1,33 +1,36 @@
 <template>
   <div class="mv-wrap">
     <div class="title frstart">
-      <h2>{{mvInfo.name}}</h2>
-      <span>{{mvInfo.artistName}}</span>
+      <h2>{{videoInfo.title}}</h2>
+      <span v-if="videoInfo.creator">{{videoInfo.creator.nickname || ''}}</span>
     </div>
     <div class="icon-wrap">
       <span>
         <i class="iconfont icon-bofang"></i>
-        {{mvInfo.playCount}}
+        {{videoInfo.playTime}}
       </span>
-      <!-- <span><i class="iconfont icon-bofang"></i>{{mvInfo.subCount}}</span> -->
+      <span>
+        <i class="iconfont icon-shoucang"></i>
+        {{videoInfo.subscribeCount}}
+      </span>
       <span>
         <i class="iconfont icon-fenxiang"></i>
-        {{mvInfo.shareCount}}
+        {{videoInfo.shareCount}}
       </span>
       <span>
         <i class="iconfont icon-xihuan"></i>
-        {{mvInfo.likeCount}}
+        {{videoInfo.praisedCount}}
       </span>
       <span>
         <i class="iconfont icon-pinglun"></i>
-        {{mvInfo.commentCount}}
+        {{videoInfo.commentCount}}
       </span>
     </div>
     <div class="desc">
-      <span>时长:{{getDate(mvInfo.duration)}}</span>
+      <span>时长:{{getDate(videoInfo.durationms)}}</span>
       <span>
         <i class="iconfont icon-shijian"></i>
-        {{mvInfo.publishTime}}
+        {{videoInfo.publishTime}}
       </span>
     </div>
     <div style="width: 900px;
@@ -41,7 +44,7 @@
     </div>
     <div style="margin-top:50px">
       <h1>概述</h1>
-      <div style="background:#eee;width:900px">{{mvInfo.desc || '暂无描述'}}</div>
+      <div style="background:#eee;width:900px">{{videoInfo.description || '暂无描述'}}</div>
       <h1 style="margin-top:30px">评论</h1>
       <div>
         <a-list
@@ -79,17 +82,19 @@ export default {
   data() {
     return {
       moment,
-      mvInfo: {},
+      videoInfo: {},
       playerOptions: {},
+      url: '',
       comments: []
     }
   },
   methods: {
-    async getMvDetail() {
-      const res = await HttpApi.getMvDetailByd({ mvid: this.$route.params.id })
+    async getVideoDetail() {
+      this.getUrlById()
+      const res = await HttpApi.getVideoInfoById({ id: this.$route.params.vid })
       if (res && res.data) {
-        const mvInfo = res.data.data
-        this.mvInfo = mvInfo
+        const videoInfo = res.data.data
+        this.videoInfo = videoInfo
         this.playerOptions = {
           playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
           autoplay: false, //如果true,浏览器准备好时开始回放。
@@ -101,11 +106,11 @@ export default {
           fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
           sources: [
             {
-              src: this.mvInfo.brs[720], // 路径
+              src: this.url, // 路径
               type: 'video/mp4' // 类型
             }
           ],
-          poster: this.mvInfo.cover, //你的封面地址
+          poster: this.videoInfo.coverUrl, //你的封面地址
           // width: document.documentElement.clientWidth,
           notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
           controlBar: {
@@ -125,16 +130,30 @@ export default {
     },
     // 获取mv评论
     async getCommentList() {
-      const res = await HttpApi.getMvCommentByid({ id: this.$route.params.id })
+      const res = await HttpApi.getVideoCommentById({
+        id: this.$route.params.vid
+      })
       if (res && res.data) {
         const comments = res.data.comments
         this.comments = comments
       }
+    },
+    // 根据id获取播放地址
+    async getUrlById() {
+      const res = await HttpApi.getVideoUrlById({
+        id: this.$route.params.vid
+      })
+      if (res && res.data) {
+        const url = res.data.urls[0].url
+        this.url = url
+      }
     }
   },
   created() {
-    this.getMvDetail()
-    this.getCommentList()
+    this.$nextTick(() => {
+      this.getVideoDetail()
+      this.getCommentList()
+    })
   }
 }
 </script>

@@ -13,8 +13,8 @@
 </template>
 <script>
 import { Table } from 'ant-design-vue'
-import MusicPlay from '../../../components/musicPlay'
-import HttpApi from '../../../assets/api/index'
+import MusicPlay from '@/components/MusicPlay'
+import HttpApi from '@/assets/api/index'
 export default {
   name: 'SingerMusic',
   components: {

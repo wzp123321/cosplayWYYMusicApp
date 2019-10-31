@@ -20,8 +20,9 @@
 <script>
 import { Carousel, CarouselItem } from 'element-ui'
 import HttpApi from '../../assets/api/index'
-import PlayList from '../../components/playList.vue'
-import AlbumItem from '../../components/albumItem.vue'
+import PlayList from '@/components/PlayList.vue'
+import AlbumItem from '@/components/AlbumItem.vue'
+
 export default {
   name: 'Introduce',
   components: {

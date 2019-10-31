@@ -13,9 +13,10 @@
   </div>
 </template>
 <script>
-import HttpApi from '../../assets/api/index'
+import HttpApi from '@/assets/api/index'
 import { Carousel, CarouselItem } from 'element-ui'
-import DJItem from '../../components/djItem'
+import DJItem from '@/components/DjItem'
+
 export default {
   name: 'Order',
   components: {

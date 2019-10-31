@@ -73,6 +73,10 @@ const routes = [{
         component: () => import('@/pages/serachPage/index.vue')
       },
       {
+        path: '/home/video/:vid',
+        component: () => import('@/pages/serachPage/videoinfo.vue')
+      },
+      {
         path: '/home',
         redirect: '/home/intro'
       }

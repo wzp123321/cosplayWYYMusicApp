@@ -1,6 +1,6 @@
 <template>
   <div class="album-wrap">
-    <img :src="albumInfo.blurPicUrl " style="width:100%;height:180px" @error="handleError" />
+    <CommonImg :src="albumInfo.blurPicUrl"></CommonImg>
     <h5>{{albumInfo.name}}</h5>
     <h5>{{albumInfo.artist.name}}</h5>
     <div class="icondiv">
@@ -10,16 +10,27 @@
 </template>
 <script>
 // 歌单组件
+import CommonImg from './CommonIMG'
+
 export default {
   name: 'AlbumItem',
+  components: {
+    CommonImg
+  },
   props: {
     albumInfo: {
       type: Object
     }
   },
+  computed: {
+    defaultImg() {
+      return 'this.src="' + require('../assets/imgs/default.png') + '"'
+    }
+  },
   methods: {
-    handleError(e) {
-      e.target.src = reqiure('@/assets/imgs/default.png')
+    imgError(e) {
+      console.log('e', e)
+      e.target
     }
   }
 }

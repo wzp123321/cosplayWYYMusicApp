@@ -25,10 +25,11 @@
   </div>
 </template>
 <script>
-import HttpApi from '../../assets/api/index'
+import HttpApi from '@/assets/api/index'
 import { Tabs } from 'ant-design-vue'
 import SingerMusic from './singerinformation/music'
 import SingerMV from './singerinformation/mv'
+
 export default {
   name: 'SingerInfo',
   components: {

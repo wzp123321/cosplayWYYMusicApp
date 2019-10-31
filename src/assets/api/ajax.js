@@ -57,7 +57,7 @@ const timeoutfn = (delay, url) => {
 }
 
 // 单个请求 存在请求超时
-export async function req (params, delay = 10 * 60 * 1000) {
+export async function req(params, delay = 10 * 60 * 1000) {
   try {
     const response = await Promise.race([
       timeoutfn(delay, params.url),
@@ -70,7 +70,7 @@ export async function req (params, delay = 10 * 60 * 1000) {
 }
 
 // GET request
-export async function getRequest (url, param) {
+export async function getRequest(url, param) {
   try {
     const response = await req({
       url,
@@ -85,7 +85,7 @@ export async function getRequest (url, param) {
 }
 
 // POST request
-export async function postRequest (url, param) {
+export async function postRequest(url, param) {
   try {
     const response = await req({
       url,

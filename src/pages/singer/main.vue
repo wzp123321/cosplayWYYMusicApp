@@ -34,8 +34,9 @@
 <script>
 import { List } from 'ant-design-vue'
 import { mapGetters } from 'vuex'
-import SingerItem from '../../components/singerItem'
-import HttpApi from '../../assets/api/index'
+import SingerItem from '@/components/SingerItem'
+import HttpApi from '@/assets/api/index'
+
 export default {
   name: 'SingerModule',
   components: {

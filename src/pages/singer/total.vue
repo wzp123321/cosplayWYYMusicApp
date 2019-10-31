@@ -4,8 +4,9 @@
   </div>
 </template>
 <script>
-import HttpApi from '../../assets/api/index'
-import SingerItem from '../../components/singerItem'
+import HttpApi from '@/assets/api/index'
+import SingerItem from '@/components/SingerItem'
+
 export default {
   name: 'SingerDetail',
   components: {

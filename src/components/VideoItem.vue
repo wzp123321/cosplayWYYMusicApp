@@ -1,19 +1,16 @@
 <template>
-  <div class="album-wrap">
-    <CommonImg
-      :src="mvInfo.imgurl||mvInfo.cover||mvInfo.coverUrl"
-      @click="toMvDetail(mvInfo.id||mvInfo.vid)"
-    />
-    <h5 class="title">{{mvInfo.name|| mvInfo.title}}</h5>
+  <div class="album-wrap"  @click="toVideoDetail(videoInfo)" >
+    <CommonImg :src="videoInfo.coverUrl" :width="160"/>
+    <h5 class="title">{{ videoInfo.title }}</h5>
     <div class="name frs">
-      <h5>{{mvInfo.artistName || mvInfo.creator.userName}}</h5>
-      <h5>{{mvInfo.publishTime||''}}</h5>
+      <h5>{{videoInfo.creator[0].userName}}</h5>
+      <h5>{{videoInfo.publishTime||''}}</h5>
     </div>
     <div class="icondiv frs">
-      <div>{{getDate(mvInfo.duration || mvInfo.durationms)}}</div>
+      <div>{{getDate( videoInfo.durationms)}}</div>
       <div>
         <i class="iconfont icon-bofang"></i>
-        {{mvInfo.playCount}}
+        {{videoInfo.playTime}}
       </div>
     </div>
   </div>
@@ -23,18 +20,18 @@
 import CommonImg from './CommonIMG'
 import { formatDuring } from '../utils/formatDate'
 export default {
-  name: 'MVItem',
+  name: 'VideoItem',
   components: {
     CommonImg
   },
   props: {
-    mvInfo: {
+    videoInfo: {
       type: Object
     }
   },
   methods: {
-    toMvDetail(id) {
-      this.$router.push('/home/mv/detail/' + id)
+    toVideoDetail(video) {
+      this.$router.push('/home/video/' + video.vid)
     },
     getDate(time) {
       return formatDuring(time)

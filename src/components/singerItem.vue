@@ -1,10 +1,9 @@
 <template>
   <div class="album-wrap" :style="`width:${width}px;height:${height}px`">
-    <img
+    <CommonImg
       :src="singerInfo.picUrl "
-      :style="`width:100%;height:${width}px`"
+      :width="width"
       @click="getSingerInfo(singerInfo.id)"
-      @error="handleError"
     />
     <p>{{singerInfo.name}}</p>
     <div style="text-align:left;margin-left:5px">
@@ -14,11 +13,13 @@
 </template>
 <script>
 // 歌单组件
+import CommonImg from './CommonIMG'
 import { Tag } from 'ant-design-vue'
 export default {
   name: 'SingerItem',
   components: {
-    'a-tag': Tag
+    'a-tag': Tag,
+    CommonImg
   },
   props: {
     singerInfo: {
@@ -36,9 +37,6 @@ export default {
   methods: {
     getSingerInfo(id) {
       this.$router.push('/home/singer/detail/' + id)
-    },
-    handleError(e) {
-      e.target.src = reqiure('../assets/imgs/default.png')
     }
   }
 }

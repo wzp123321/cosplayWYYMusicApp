@@ -13,6 +13,7 @@
 import { List } from 'ant-design-vue'
 import store from '../../store/index'
 import { mapGetters } from 'vuex'
+
 export default {
   name: 'MusicMenu',
   store,

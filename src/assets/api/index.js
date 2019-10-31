@@ -23,7 +23,14 @@ export default {
     getdjbannerlist: 'http://localhost:3000/dj/banner',
     gethotdjlist: 'http://localhost:3000/dj/hot',
     getsearchdata: 'http://localhost:3000/search',
-    getmvbytypearea : 'http://localhost:3000/mv/all'
+    getmvbytypearea: 'http://localhost:3000/mv/all',
+    getuserloginbyphone: 'http://localhost:3000/login/cellphone',
+    getuserloginbyemail: 'http://localhost:3000/login',
+    getalbuminfobyid:'http://localhost:3000/album',
+    getalbumdatacountbyid:'http://localhost:3000/album/detail/dynamic',
+    getvideoinfo:'http://localhost:3000/video/detail',
+    getvideourlbyid:'http://localhost:3000/video/url',
+    getvideocommentbyid:'http://localhost:3000/comment/video'
   },
   //   推荐页面banner
   getPCBannersList(params) {
@@ -92,5 +99,33 @@ export default {
   //    根据地区 类型获取mv
   getMvListByAreaType(params) {
     return getRequest(this.$$path.getmvbytypearea, params)
+  },
+  //    用户手机号码登录
+  getUserLoginByPhone(params) {
+    return getRequest(this.$$path.getuserloginbyphone, params)
+  },
+  //    用户邮箱登录
+  getUserLoginByEmail(params) {
+    return getRequest(this.$$path.getuserloginbyemail, params)
+  },
+  //    根据id获取专辑信息
+  getAlbumInfoById(params) {
+    return getRequest(this.$$path.getalbuminfobyid, params)
+  },
+  // 调用此接口 , 传入专辑 id, 可获得专辑动态信息,如是否收藏,收藏数,评论数,分享数
+  getAlbumDataCountById(params) {
+    return getRequest(this.$$path.getalbumdatacountbyid, params)
+  },
+  //    根据id获取视频信息
+  getVideoInfoById(params) {
+    return getRequest(this.$$path.getvideoinfo, params)
+  },
+  // 根据id获取视频播放地址
+  getVideoUrlById(params) {
+    return getRequest(this.$$path.getvideourlbyid, params)
+  },
+   // 根据id获取视频评论
+   getVideoCommentById(params) {
+    return getRequest(this.$$path.getvideocommentbyid, params)
   },
 }

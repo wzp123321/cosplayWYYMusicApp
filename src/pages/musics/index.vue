@@ -62,7 +62,7 @@
 <script>
 import MusicMenu from './music-menu.vue'
 import { Table } from 'ant-design-vue'
-import MusicPlay from '../../components/musicPlay.vue'
+import MusicPlay from '@/components/MusicPlay.vue'
 import HttpApi from '../../assets/api/index'
 import { formatDate } from '../../utils/formatDate'
 export default {
@@ -125,7 +125,7 @@ export default {
     playEnd(obj) {
       this.musicInfo = obj
     },
-    // 点击根据id获取歌曲信息
+    /* 点击根据id获取歌曲信息  */
     async playMusic(id, musicName, author, picUrl) {
       const res = await HttpApi.getMusicInfoById({ id })
       if (res && res.data) {

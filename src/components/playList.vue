@@ -1,6 +1,6 @@
 <template>
   <div class="playlist-wrap">
-    <img :src="playListInfo.picUrl" style="width:100%;height:180px" @error="handleError"/>
+    <CommonImg :src="playListInfo.picUrl"></CommonImg>
     <div class="playlist-content">
       <span class="title">{{playListInfo.name}}</span>
     </div>
@@ -17,19 +17,17 @@
 </template>
 <script>
 // 歌单组件
+import CommonImg from './CommonIMG'
 export default {
   name: 'PlayList',
+  components: {
+    CommonImg
+  },
   props: {
     playListInfo: {
       type: Object
     }
-  },
-  methods: {
-     handleError(e) {
-      e.target.src = reqiure('../assets/imgs/default.png')
-    }
-  },
-  created () {}
+  }
 }
 </script>
 <style lang="less" scoped>

@@ -18,9 +18,10 @@
   </div>
 </template>
 <script>
-import HttpApi from '../assets/api/index'
+import HttpApi from '@/assets/api/index'
 import { message } from 'ant-design-vue'
 import VueAplayer from 'vue-aplayer'
+
 export default {
   name: 'MusicPlay',
   components: {

@@ -21,6 +21,11 @@
           <MVItem v-for="(mvItem,index) in mvs" :key="index" :mvInfo="mvItem"></MVItem>
         </div>
       </a-tab-pane>
+      <a-tab-pane tab="视频" key="3" forceRender>
+        <div style="display:flex;flex-wrap:wrap">
+          <VideoItem v-for="(vItem,index) in videos" :key="index" :videoInfo="vItem"></VideoItem>
+        </div>
+      </a-tab-pane>
     </a-tabs>
     <MusicPlay
       @playEnd="playEnd"
@@ -31,11 +36,12 @@
   </div>
 </template>
 <script>
-import HttpApi from '../../assets/api/index'
+import HttpApi from '@/assets/api/index'
 import { Table, Tabs } from 'ant-design-vue'
 import { formatDuring } from '../../utils/formatDate'
-import MusicPlay from '../../components/musicPlay'
-import MVItem from '../../components/mvItem'
+import MusicPlay from '@/components/MusicPlay'
+import MVItem from '@/components/MvItem'
+import VideoItem from '@/components/VideoItem'
 export default {
   name: 'SearchPage',
   components: {
@@ -43,13 +49,15 @@ export default {
     'a-tabs': Tabs,
     'a-tab-pane': Tabs.TabPane,
     MusicPlay,
-    MVItem
+    MVItem,
+    VideoItem
   },
   data() {
     return {
       songs: [],
       musicInfo: {},
       mvs: [],
+      videos: [],
       columns: [
         {
           key: 'sort',
@@ -97,21 +105,26 @@ export default {
     callback(key) {},
     async getSearchData() {
       const keywords = this.$route.params.key
-      const res = await HttpApi.getSearchData({
-        keywords
-      })
-      if (res && res.data) {
-        const songs = res.data.result.songs
-        this.songs = songs
-      }
+      const promiseAll = [
+        HttpApi.getSearchData({
+          keywords
+        }),
+        HttpApi.getSearchData({
+          keywords,
+          type: '1004'
+        }),
+        HttpApi.getSearchData({
+          keywords,
+          type: '1014'
+        })
+      ]
+      const arrays = ['songs', 'mvs', 'videos']
 
-      const resa = await HttpApi.getSearchData({
-        keywords,
-        type: '1004'
-      })
-      if (resa && resa.data) {
-        const mvs = resa.data.result.mvs
-        this.mvs = mvs
+      const resolveAll = await Promise.all(promiseAll)
+      if (resolveAll) {
+        resolveAll.forEach((item, index) => {
+          this[arrays[index]] = item.data.result[arrays[index]]
+        })
       }
     },
     getDate(time) {

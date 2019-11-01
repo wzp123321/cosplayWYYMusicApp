@@ -64,7 +64,7 @@ import MusicMenu from './music-menu.vue'
 import { Table } from 'ant-design-vue'
 import MusicPlay from '@/components/MusicPlay.vue'
 import HttpApi from '../../assets/api/index'
-import { formatDate } from '../../utils/formatDate'
+import * as utils from '../../utils/formatDate'
 export default {
   name: 'Musics',
   components: {
@@ -173,7 +173,7 @@ export default {
       }
     },
     getDate() {
-      return formatDate(this.topInfo.trackUpdateTime)
+      return utils.formatDate(this.topInfo.trackUpdateTime)
     }
   },
   async created() {

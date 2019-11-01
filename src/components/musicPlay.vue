@@ -5,7 +5,6 @@
       mode="single"
       @error="playError"
       @ended="palyEnd"
-      autoplay
       :music="{
         title: musicInfo.musicName,
         author: musicInfo.author,
@@ -31,6 +30,10 @@ export default {
   props: {
     musicInfo: {
       type: Object
+    },
+    sort: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -43,7 +46,7 @@ export default {
       this.$emit('close')
     },
     palyEnd() {
-      this.$emit('playEnd', this.musicInfo)
+      this.$emit('playEnd', this.sort)
     },
     playError() {
       this.$message.error('播放错误')
@@ -57,16 +60,16 @@ export default {
       }
     }
   },
-  watch:{
-    musicInfo:function(newVal,oldVal){
-      this.getLrc();
+  watch: {
+    musicInfo: function(newVal, oldVal) {
+      this.getLrc()
     }
   },
   created() {
     this.$nextTick(() => {
+      document.getElementsByTagName('audio')[0].setAttribute('autoplay', true)
       this.getLrc()
     })
-    console.log(this.musicInfo)
   }
 }
 </script>

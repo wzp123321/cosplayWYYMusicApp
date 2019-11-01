@@ -1,6 +1,6 @@
 import axios from 'axios'
-
-const BASE_URL = 'http://127.0.0.1:9898'
+// 'https://music.163.com'
+const BASE_URL = ''
 // 定义一个空的数组，用于存放请求中的参数
 
 // 创建axios实例

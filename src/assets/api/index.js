@@ -30,7 +30,8 @@ export default {
     getalbumdatacountbyid:'http://localhost:3000/album/detail/dynamic',
     getvideoinfo:'http://localhost:3000/video/detail',
     getvideourlbyid:'http://localhost:3000/video/url',
-    getvideocommentbyid:'http://localhost:3000/comment/video'
+    getvideocommentbyid:'http://localhost:3000/comment/video',
+    getplaylistinfo:'http://localhost:3000/playlist/detail'
   },
   //   推荐页面banner
   getPCBannersList(params) {
@@ -127,5 +128,9 @@ export default {
    // 根据id获取视频评论
    getVideoCommentById(params) {
     return getRequest(this.$$path.getvideocommentbyid, params)
+  },
+   // 根据id获取歌单详情
+   getPlayListDetailById(params) {
+    return getRequest(this.$$path.getplaylistinfo, params)
   },
 }

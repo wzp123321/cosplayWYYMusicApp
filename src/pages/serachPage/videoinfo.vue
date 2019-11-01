@@ -67,7 +67,7 @@
 <script>
 import moment from 'moment'
 import HttpApi from '@/assets/api/index'
-import { formatDuring, updateTime } from '@/utils/formatDate'
+import * as tuils from '@/utils/formatDate'
 import { videoPlayer } from 'vue-video-player'
 import { List, Comment } from 'ant-design-vue'
 import 'video.js/dist/video-js.css'
@@ -123,10 +123,10 @@ export default {
       }
     },
     getDate(time) {
-      return formatDuring(time)
+      return tuils.formatDuring(time)
     },
     formattime(time) {
-      return updateTime(time)
+      return tuils.updateTime(time)
     },
     // 获取mv评论
     async getCommentList() {

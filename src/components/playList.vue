@@ -1,5 +1,5 @@
 <template>
-  <div class="playlist-wrap">
+  <div class="playlist-wrap" @click="toPlayListDetail(playListInfo.id)">
     <CommonImg :src="playListInfo.picUrl"></CommonImg>
     <div class="playlist-content">
       <span class="title">{{playListInfo.name}}</span>
@@ -26,6 +26,11 @@ export default {
   props: {
     playListInfo: {
       type: Object
+    }
+  },
+  methods: {
+    toPlayListDetail(id) {
+      this.$router.push('/home/playlist/' + id)
     }
   }
 }

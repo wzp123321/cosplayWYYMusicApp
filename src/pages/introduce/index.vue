@@ -31,7 +31,7 @@ export default {
     PlayList,
     AlbumItem
   },
-  data () {
+  data() {
     return {
       banners: [],
       playlists: [],
@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     // 获取banners
-    async getBannersList () {
+    async getBannersList() {
       const res = await HttpApi.getPCBannersList({ type: 0 })
       if (res && res.data) {
         const banners = res.data.banners
@@ -48,7 +48,7 @@ export default {
       }
     },
     // 获取推荐歌单
-    async getIntroPlayList () {
+    async getIntroPlayList() {
       const res = await HttpApi.getIntroPlayList()
       if (res && res.data) {
         const playlists = res.data.result
@@ -56,7 +56,7 @@ export default {
       }
     },
     // 获取新碟上架
-    async getNewAlbum () {
+    async getNewAlbum() {
       const res = await HttpApi.getAlbumList()
       if (res && res.data) {
         const albums = res.data.albums
@@ -64,7 +64,7 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     this.$nextTick(() => {
       this.getBannersList()
       this.getIntroPlayList()

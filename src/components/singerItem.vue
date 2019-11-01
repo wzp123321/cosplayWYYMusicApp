@@ -1,9 +1,8 @@
 <template>
-  <div class="album-wrap" :style="`width:${width}px;height:${height}px`">
+  <div class="album-wrap" :style="`width:${width}px;height:${height}px`"  @click="getSingerInfo(singerInfo.id)">
     <CommonImg
       :src="singerInfo.picUrl "
       :width="width"
-      @click="getSingerInfo(singerInfo.id)"
     />
     <p>{{singerInfo.name}}</p>
     <div style="text-align:left;margin-left:5px">
@@ -36,6 +35,7 @@ export default {
   },
   methods: {
     getSingerInfo(id) {
+      console.log('1212')
       this.$router.push('/home/singer/detail/' + id)
     }
   }

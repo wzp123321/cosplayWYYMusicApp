@@ -1,9 +1,6 @@
 <template>
-  <div class="album-wrap">
-    <CommonImg
-      :src="mvInfo.imgurl||mvInfo.cover||mvInfo.coverUrl"
-      @click="toMvDetail(mvInfo.id||mvInfo.vid)"
-    />
+  <div class="album-wrap" @click="toMvDetail(mvInfo.id||mvInfo.vid)">
+    <CommonImg :src="mvInfo.imgurl||mvInfo.cover||mvInfo.coverUrl" />
     <h5 class="title">{{mvInfo.name|| mvInfo.title}}</h5>
     <div class="name frs">
       <h5>{{mvInfo.artistName || mvInfo.creator.userName}}</h5>
@@ -21,7 +18,7 @@
 <script>
 // mv组件
 import CommonImg from './CommonIMG'
-import { formatDuring } from '../utils/formatDate'
+import * as utils from '../utils/formatDate'
 export default {
   name: 'MVItem',
   components: {
@@ -37,7 +34,7 @@ export default {
       this.$router.push('/home/mv/detail/' + id)
     },
     getDate(time) {
-      return formatDuring(time)
+      return utils.formatDuring(time)
     }
   }
 }

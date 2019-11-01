@@ -62,7 +62,15 @@
   </div>
 </template>
 <script>
-import { Menu, Input, Modal, Form, Icon, Radio, message } from 'ant-design-vue'
+import {
+  Menu,
+  Input,
+  Modal,
+  Form,
+  Icon,
+  Radio,
+  message
+} from 'ant-design-vue'
 import { mapGetters, mapActions } from 'vuex'
 import HttpApi from '@/assets/api/index'
 
@@ -89,7 +97,7 @@ export default {
       anchorHeight: 0, //导航栏的高度
       activeIndex: 0, //导航栏高亮的索引
       visible: false,
-      isPhone: true
+      isPhone: true,
     }
   },
   beforeCreate() {

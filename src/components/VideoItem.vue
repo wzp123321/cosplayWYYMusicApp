@@ -18,7 +18,7 @@
 <script>
 // mv组件
 import CommonImg from './CommonIMG'
-import { formatDuring } from '../utils/formatDate'
+import * as utils from '../utils/formatDate'
 export default {
   name: 'VideoItem',
   components: {
@@ -34,7 +34,7 @@ export default {
       this.$router.push('/home/video/' + video.vid)
     },
     getDate(time) {
-      return formatDuring(time)
+      return utils.formatDuring(time)
     }
   }
 }

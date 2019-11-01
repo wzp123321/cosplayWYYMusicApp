@@ -38,7 +38,7 @@
 <script>
 import HttpApi from '@/assets/api/index'
 import { Table, Tabs } from 'ant-design-vue'
-import { formatDuring } from '../../utils/formatDate'
+import* as utils from '../../utils/formatDate'
 import MusicPlay from '@/components/MusicPlay'
 import MVItem from '@/components/MvItem'
 import VideoItem from '@/components/VideoItem'
@@ -128,7 +128,7 @@ export default {
       }
     },
     getDate(time) {
-      return formatDuring(time)
+      return utils.formatDuring(time)
     },
     async playMusic(id, musicName, author, picUrl) {
       const res = await HttpApi.getMusicInfoById({ id })

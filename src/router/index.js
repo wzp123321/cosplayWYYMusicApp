@@ -6,28 +6,28 @@ Vue.use(VueRouter)
 const routes = [{
     path: '/home',
     meta: {
-      name: '首页'
+      name: 'cosplay网易云app'
     },
     component: () => import('@/pages/index.vue'),
     children: [{
         path: '/home/music',
         component: () => import('@/pages/musics/index.vue'),
         meta: {
-          name: '歌曲管理'
+          name: '歌曲管理页面'
         }
       },
       {
         path: '/home/intro',
         component: () => import('@/pages/introduce/index.vue'),
         meta: {
-          name: '推荐'
+          name: 'cosplay网易云app'
         }
       },
       {
         path: '/home/radio',
         component: () => import('@/pages/radio/index.vue'),
         meta: {
-          name: '电台'
+          name: '电台页面'
         }
       },
       {
@@ -47,22 +47,21 @@ const routes = [{
             path: '/home/singer/total/:id',
             component: () => import('@/pages/singer/total.vue'),
             meta: {
-              name: '歌手总览'
+              name: '歌手总览页面'
             }
           },
           {
             path: '/home/singer/detail/:id',
-            title: '歌手详情',
             component: () => import('@/pages/singer/singerinfo.vue'),
             meta: {
-              name: '歌手详情'
+              name: '歌手详情页面'
             }
           },
           {
             path: '/home/mv/detail/:id',
             component: () => import('@/pages/singer/mvdetail.vue'),
             meta: {
-              name: 'mv详情'
+              name: 'mv详情页面'
             }
           },
           {
@@ -74,14 +73,14 @@ const routes = [{
       {
         path: '/home/mv',
         meta: {
-          name: 'mv页',
+          name: 'mv页面',
         },
         component: () => import('@/pages/mvpage/index.vue')
       },
       {
         path: '/home/search/:key',
         meta: {
-          name: '搜索页',
+          name: '搜索页面',
         },
         component: () => import('@/pages/serachPage/index.vue')
       },
@@ -96,7 +95,7 @@ const routes = [{
         path: '/home/playlist/:id',
         component: () => import('@/pages/detail/playListDetail.vue'),
         meta: {
-          name: '歌单详情'
+          name: '歌单详情页面'
         }
       },
       {

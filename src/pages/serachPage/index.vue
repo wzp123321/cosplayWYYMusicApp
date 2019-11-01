@@ -8,10 +8,10 @@
             <img :src="record.artists[0].img1v1Url" style="width:60px;height:60px" alt />
           </span>
           <span slot="time" slot-scope="text,record">{{getDate(record.duration)}}</span>
-          <span slot="action" slot-scope="text,record">
+          <span slot="action" slot-scope="text,record,index">
             <i
               class="iconfont icon-bofang"
-              @click="playMusic(record.id,record.name,record.artists[0].name,record.artists[0].img1v1Url)"
+              @click="playMusic(record.id,record.name,record.artists[0].name,record.artists[0].img1v1Url,index)"
             ></i>
           </span>
         </a-table>
@@ -30,6 +30,7 @@
     <MusicPlay
       @playEnd="playEnd"
       :musicInfo="musicInfo"
+      :sort="sort"
       v-if="JSON.stringify(musicInfo) !== '{}'"
       @close="closeMusic"
     ></MusicPlay>
@@ -38,7 +39,7 @@
 <script>
 import HttpApi from '@/assets/api/index'
 import { Table, Tabs } from 'ant-design-vue'
-import* as utils from '../../utils/formatDate'
+import * as utils from '../../utils/formatDate'
 import MusicPlay from '@/components/MusicPlay'
 import MVItem from '@/components/MvItem'
 import VideoItem from '@/components/VideoItem'
@@ -54,6 +55,7 @@ export default {
   },
   data() {
     return {
+      sort: 0,
       songs: [],
       musicInfo: {},
       mvs: [],
@@ -99,8 +101,14 @@ export default {
   },
   methods: {
     // 播放完成
-    playEnd(obj) {
-      this.musicInfo = obj
+    playEnd(sort) {
+      playMusic(
+        this.songs[sort + 1].id,
+        this.songs[sort + 1].name,
+        this.songs[sort + 1].artists[0].name,
+        this.songs[sort + 1].artists[0].img1v1Url,
+        sort + 1
+      )
     },
     callback(key) {},
     async getSearchData() {
@@ -130,7 +138,8 @@ export default {
     getDate(time) {
       return utils.formatDuring(time)
     },
-    async playMusic(id, musicName, author, picUrl) {
+    async playMusic(id, musicName, author, picUrl, sort) {
+      this.sort = sort
       const res = await HttpApi.getMusicInfoById({ id })
       if (res && res.data) {
         const musicInfo = res.data.data[0]

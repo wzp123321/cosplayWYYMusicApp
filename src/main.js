@@ -14,10 +14,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
+  document.title = to.meta.name
   Nprogress.start()
   next()
 })

@@ -54,7 +54,7 @@ export default {
     async getLrc() {
       const id = this.musicInfo.id
       const res = await HttpApi.getMusicLyricById({ id })
-      if (res && res.data) {
+      if (res && res.data &&  res.data.lrc ) {
         const lyric = res.data.lrc.lyric
         this.lyric = lyric
       }

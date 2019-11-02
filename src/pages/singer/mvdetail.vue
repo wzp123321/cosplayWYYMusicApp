@@ -101,7 +101,11 @@ export default {
           fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
           sources: [
             {
-              src: this.mvInfo.brs[720], // 路径
+              src:
+                this.mvInfo.brs[240] ||
+                this.mvInfo.brs[480] ||
+                this.mvInfo.brs[720] ||
+                this.mvInfo.brs[1080], // 路径
               type: 'video/mp4' // 类型
             }
           ],

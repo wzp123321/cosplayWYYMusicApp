@@ -17,14 +17,16 @@
         </a-table>
       </a-tab-pane>
       <a-tab-pane tab="mv" key="2" forceRender>
-        <div style="display:flex;flex-wrap:wrap">
+        <div style="display:flex;flex-wrap:wrap" v-if="JSON.stringify(mvs) !== '[]'">
           <MVItem v-for="(mvItem,index) in mvs" :key="index" :mvInfo="mvItem"></MVItem>
         </div>
+        <a-empty style="margin-top:150px" v-else description="暂无数据" />
       </a-tab-pane>
       <a-tab-pane tab="视频" key="3" forceRender>
-        <div style="display:flex;flex-wrap:wrap">
+        <div style="display:flex;flex-wrap:wrap" v-if="JSON.stringify(videos) !== '[]'">
           <VideoItem v-for="(vItem,index) in videos" :key="index" :videoInfo="vItem"></VideoItem>
         </div>
+        <a-empty style="margin-top:150px" v-else description="暂无数据" />
       </a-tab-pane>
     </a-tabs>
     <MusicPlay
@@ -38,7 +40,7 @@
 </template>
 <script>
 import HttpApi from '@/assets/api/index'
-import { Table, Tabs } from 'ant-design-vue'
+import { Table, Tabs, Empty } from 'ant-design-vue'
 import * as utils from '../../utils/formatDate'
 import MusicPlay from '@/components/MusicPlay'
 import MVItem from '@/components/MvItem'
@@ -49,6 +51,7 @@ export default {
     'a-table': Table,
     'a-tabs': Tabs,
     'a-tab-pane': Tabs.TabPane,
+    'a-empty': Empty,
     MusicPlay,
     MVItem,
     VideoItem
@@ -131,7 +134,9 @@ export default {
       const resolveAll = await Promise.all(promiseAll)
       if (resolveAll) {
         resolveAll.forEach((item, index) => {
-          this[arrays[index]] = item.data.result[arrays[index]]
+          if (item && item.data && item.data.result) {
+            this[arrays[index]] = item.data.result[arrays[index]] || []
+          }
         })
       }
     },

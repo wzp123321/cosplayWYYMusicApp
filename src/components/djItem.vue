@@ -22,13 +22,14 @@ export default {
 </script>
 <style lang="less" scoped>
 .album-wrap {
-  width: 160px;
+  width: 170px;
   height: 210px;
   margin-right: 20px;
   margin-bottom: 10px;
   border: 1px solid #eee;
   border-radius: 5px;
   position: relative;
+  bottom: 0;
   color: #000;
   h5 {
     text-align: left;
@@ -41,5 +42,9 @@ export default {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+}
+
+.album-wrap:hover{
+  bottom: 4px;
 }
 </style>

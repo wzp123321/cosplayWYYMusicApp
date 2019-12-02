@@ -44,6 +44,7 @@ export default {
   border: 1px solid #eee;
   border-radius: 5px;
   position: relative;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   .playlist-content {
@@ -63,5 +64,9 @@ export default {
     height: 40px;
     background: rgba(0, 0, 0, 0.5);
   }
+}
+
+.playlist-wrap:hover {
+  bottom: 3px;
 }
 </style>

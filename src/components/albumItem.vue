@@ -37,13 +37,14 @@ export default {
 </script>
 <style lang="less" scoped>
 .album-wrap {
-  width: 180px;
+  width: 210px;
   height: 230px;
   margin-right: 20px;
   margin-bottom: 10px;
   border: 1px solid #eee;
   border-radius: 5px;
   position: relative;
+  bottom: 0;
   color: #000;
   h5 {
     text-align: center;
@@ -77,5 +78,8 @@ export default {
       display: inline-block;
     }
   }
+}
+.album-wrap :hover {
+  bottom: 5px;
 }
 </style>

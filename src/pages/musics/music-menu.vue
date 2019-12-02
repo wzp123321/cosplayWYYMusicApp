@@ -1,6 +1,7 @@
 <template>
   <a-list class="music-list" bordered :dataSource="topList">
     <a-list-item
+      style="cursor:pointer"
       slot="renderItem"
       @click="handleTypeChange(item.key)"
       slot-scope="item, index"
@@ -28,11 +29,11 @@ export default {
     }
   },
   computed: mapGetters(['topList']),
-  data () {
+  data() {
     return {}
   },
   methods: {
-    handleTypeChange (idx) {
+    handleTypeChange(idx) {
       this.$emit('search', idx)
     }
   }

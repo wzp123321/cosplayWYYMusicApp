@@ -1,7 +1,16 @@
 <template>
-  <a-layout id="components-layout-demo-custom-trigger" class="common-wrapper">
-    <Header :collpased="collpased" @collapsedChange="collapsedChange"></Header>
-    <Content></Content>
+  <a-layout id="components-layout-demo-custom-trigger" class="common-wrapper container">
+    <div style="flex:1">
+      <a-layout-header style="background:#fff;height:48px">
+        <Header :collpased="collpased" @collapsedChange="collapsedChange"></Header>
+      </a-layout-header>
+      <a-layout-content>
+        <Content></Content>
+      </a-layout-content>
+    </div>
+    <!-- <a-layout-footer style="width:100%;height:120px;">
+      <Footer></Footer>
+    </a-layout-footer> -->
   </a-layout>
 </template>
 
@@ -9,15 +18,20 @@
 import { Layout } from 'ant-design-vue'
 import Header from '../layout/header.vue'
 import Content from '../layout/content.vue'
+import Footer from '../layout/footer.vue'
 
 export default {
   name: 'Index',
   components: {
     Header,
+    Footer,
     Content,
-    'a-layout': Layout
+    'a-layout': Layout,
+    'a-layout-header': Layout.Header,
+    'a-layout-content': Layout.Content,
+    'a-layout-footer': Layout.Footer
   },
-  data () {
+  data() {
     return {
       collpased: false,
       routeList: []
@@ -25,10 +39,10 @@ export default {
   },
 
   methods: {
-    collapsedChange () {
+    collapsedChange() {
       this.collpased = !this.collpased
     },
-    routeLinkTo (path) {
+    routeLinkTo(path) {
       this.$router.push(path)
     }
   }
@@ -56,5 +70,10 @@ export default {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
 }
 </style>

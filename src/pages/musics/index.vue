@@ -8,7 +8,7 @@
           <h3>{{topInfo.name}}</h3>
           <p class="description">{{topInfo.description}}</p>
           <p class="time">
-            最近更新
+            最近更新：
             <i class="iconfont icon-shijian"></i>
             <span>{{getDate() || ' '}}</span>
           </p>
@@ -43,11 +43,13 @@
         <span slot="author" slot-scope="text,record">{{record.ar[0].name}}</span>
         <span slot="description" slot-scope="text,record">{{record.alia[0] || '暂无描述'}}</span>
         <span slot="action" slot-scope="text, record">
-          <a
+          <span
             href="javascript:;"
             class="ant-dropdown-link"
             @click="playMusic(record.id,record.al.name,record.ar[0].name,record.al.picUrl)"
-          >播放</a>
+          >
+            <i class="iconfont icon-bofang"></i>
+          </span>
         </span>
       </a-table>
     </div>
@@ -89,16 +91,17 @@ export default {
           customRender: (text, record, index) => record.al.name
         },
         {
-          title: '封面',
-          key: 'picUrl',
-          dataIndex: 'picUrl',
-          scopedSlots: { customRender: 'picUrl' }
-        },
-        {
           title: '作者',
           dataIndex: 'author',
           key: 'author',
           scopedSlots: { customRender: 'author' }
+        },
+        {
+          title: '时长',
+          key: 'time',
+          customRender: (text, record, index) => {
+            return utils.formatDuring(record.dt)
+          }
         },
         {
           title: '描述',
@@ -107,7 +110,6 @@ export default {
           scopedSlots: { customRender: 'description' }
         },
         {
-          title: '操作',
           key: 'action',
           scopedSlots: { customRender: 'action' }
         }

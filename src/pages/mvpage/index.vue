@@ -1,7 +1,7 @@
 <template>
   <div class="mv-wrapper">
     <div class="header">
-      <a-list itemLayout="horizontal" :dataSource="datas">
+      <a-list itemLayout="horizontal" :dataSource="datas" style=" text-align: left !important;margin-left:10px">
         <a-list-item slot="renderItem" slot-scope="item, index" :key="index">
           <span class="select-title">{{item.title}}</span>
           <span
@@ -16,7 +16,12 @@
     </div>
     <div class="content">
       <MVItem v-for="(mvItem,index) in mvs" :key="index" :mvInfo="mvItem"></MVItem>
-       <a-pagination size="small" :total="total" :current="current" @change="handlePaginationChange"/>
+      <a-pagination
+        size="small"
+        :total="total"
+        :current="current"
+        @change="handlePaginationChange"
+      />
     </div>
   </div>
 </template>
@@ -31,15 +36,15 @@ export default {
     'a-list': List,
     'a-list-item': List.Item,
     MVItem,
-    'a-pagination':Pagination
+    'a-pagination': Pagination
   },
   data() {
     return {
       area: '全部',
       type: '全部',
       mvs: [],
-      total:10,
-      current:1,
+      total: 10,
+      current: 1,
       datas: [
         {
           type: 0,
@@ -63,8 +68,8 @@ export default {
       const res = await HttpApi.getMvListByAreaType({
         area: this.area === '全部' ? '' : this.area,
         type: this.type === '全部' ? '' : this.type,
-        offset:this.current,
-        limit:50
+        offset: this.current,
+        limit: 50
       })
       if (res && res.data) {
         const mvs = res.data.data
@@ -73,9 +78,9 @@ export default {
         this.total = total
       }
     },
-    handlePaginationChange(val){
-     this.current = val
-     this.getMvList()
+    handlePaginationChange(val) {
+      this.current = val
+      this.getMvList()
     }
   },
   created() {

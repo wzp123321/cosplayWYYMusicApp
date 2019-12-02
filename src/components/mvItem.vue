@@ -41,13 +41,14 @@ export default {
 </script>
 <style lang="less" scoped>
 .album-wrap {
-  width: 185px;
+  width: 210px;
   height: 230px;
   margin-right: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border: 1px solid #eee;
   border-radius: 5px;
   position: relative;
+  bottom:0;
   color: #000;
   img {
     width: 100%;
@@ -59,13 +60,16 @@ export default {
   }
   .title,
   .name h5 {
-    margin: 8px 5px 0 5px;
+    margin: 5px 5px 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .icondiv {
     width: 100%;
     height: 40px;
     position: absolute;
-    top: 120px;
+    top: 140px;
     left: 0;
     background: rgba(0, 0, 0, 0.3);
     color: #fff;
@@ -77,5 +81,8 @@ export default {
       font-size: 13px;
     }
   }
+}
+.album-wrap:hover{
+  bottom: 4px;
 }
 </style>

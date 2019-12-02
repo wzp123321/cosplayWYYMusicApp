@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="info-list">
-        <h1>歌曲列表</h1>
+        <h1 style="text-align:left;padding:10px 0;">歌曲列表</h1>
         <a-table :columns="columns" :dataSource="playListInfo.tracks" :rowKey="rowKey=>rowKey.id">
           <span slot="time" slot-scope="text,record">{{formatDate(0,record.dt)}}</span>
           <span slot="action" slot-scope="text,record,index">

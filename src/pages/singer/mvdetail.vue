@@ -33,10 +33,20 @@
     <div style="width: 900px;
   height: 500px;">
       <video-player
-        class="video-player vjs-custom-skin"
+        class="video-player-box"
         ref="videoPlayer"
-        :playsinline="true"
         :options="playerOptions"
+        :playsinline="true"
+        customEventName="customstatechangedeventname"
+        @play="onPlayerPlay($event)"
+        @pause="onPlayerPause($event)"
+        @ended="onPlayerEnded($event)"
+        @playing="onPlayerPlaying($event)"
+        @loadeddata="onPlayerLoadeddata($event)"
+        @timeupdate="onPlayerTimeupdate($event)"
+        @canplay="onPlayerCanplay($event)"
+        @statechanged="playerStateChanged($event)"
+        @ready="playerReadied"
       ></video-player>
     </div>
     <div style="margin-top:50px">
@@ -85,6 +95,28 @@ export default {
     }
   },
   methods: {
+    // play事件
+    onPlayerPlay(e) {},
+    // 暂停事件
+    onPlayerPause(e) {},
+    // 暂停事件
+    onPlayerEnded(e) {},
+    // 播放ing
+    onPlayerPlaying(e) {},
+    // 加载数据
+    onPlayerLoadeddata(e) {},
+    // 播放时间更改
+    onPlayerTimeupdate(e) {},
+    // 能够播放
+    onPlayerCanplay(e) {},
+    playerStateChanged(playerCurrentState) {
+      // console.log('player current update state', playerCurrentState)
+    },
+    playerReadied(player) {
+      console.log('the player is readied', player)
+      // you can use it to do something...
+      // player.[methods]
+    },
     async getMvDetail() {
       const res = await HttpApi.getMvDetailByd({ mvid: this.$route.params.id })
       if (res && res.data) {

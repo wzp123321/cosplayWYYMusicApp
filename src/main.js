@@ -13,6 +13,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 引入nprogress
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
+// 引入vue-video-player
+import 'video.js/dist/video-js.css'
 
 Vue.config.productionTip = false
 

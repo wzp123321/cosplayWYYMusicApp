@@ -1,5 +1,5 @@
 <template>
-  <div class="content" :style="{marginTop: isFixed?'40px':'15px'}">
+  <div class="content" :style="{ marginTop: isFixed ? '30px' : '15px'}">
     <router-view></router-view>
   </div>
 </template>

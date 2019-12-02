@@ -14,6 +14,10 @@
     }"
     ></a-player>
     <i class="iconfont icon-guanbi" @click="closeMusic"></i>
+    <div class="change-icon">
+      <i class="iconfont icon-shangyishou" @click="changeMusicPlay('left')"></i>
+      <i class="iconfont icon-xiayishou" @click="changeMusicPlay('right')"></i>
+    </div>
   </div>
 </template>
 <script>
@@ -51,10 +55,23 @@ export default {
     playError() {
       this.$message.error('播放错误')
     },
+    /**
+     * 切换歌曲
+     */
+    changeMusicPlay(type) {
+      if (type === 'left') {
+        this.$emit('playEnd', this.sort - 1)
+      } else {
+        this.$emit('playEnd', this.sort + 1)
+      }
+    },
+    /**
+     * 获取歌词
+     */
     async getLrc() {
       const id = this.musicInfo.id
       const res = await HttpApi.getMusicLyricById({ id })
-      if (res && res.data &&  res.data.lrc ) {
+      if (res && res.data && res.data.lrc) {
         const lyric = res.data.lrc.lyric
         this.lyric = lyric
       }
@@ -80,10 +97,22 @@ export default {
   z-index: 999;
   top: 70% !important;
   left: 210px !important;
-  .iconfont {
+  .icon-guanbi {
     position: absolute;
     top: 4px;
     right: 8px;
+  }
+  .change-icon {
+    position: absolute;
+    top: 40px;
+    left: 106px;
+    .iconfont {
+      display: inline-block;
+      padding: 0 5px;
+    }
+    .iconfont:hover {
+      font-size: 17px;
+    }
   }
 }
 </style>

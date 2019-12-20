@@ -1,0 +1,72 @@
+.avatar {
+    text-align: center;
+
+}
+
+.avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.avatar img:first-child:hover {
+    animation: avatar_scale 1s linear infinite forwards;
+}
+
+.avatar img:nth-child(2):hover {
+    animation: avatar_shake 200ms linear infinite forwards;
+}
+
+/* 鼠标悬浮头像放大缩小 */
+@keyframes avatar_scale {
+
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(0.6);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1);
+
+    }
+}
+
+
+/* 鼠标悬浮头像抖动 */
+@keyframes avatar_shake {
+
+    0% {
+        transform: rotateZ(0deg);
+
+    }
+
+    25% {
+        transform: rotateZ(5deg);
+
+    }
+
+    50% {
+        transform: rotateZ(0deg);
+
+    }
+
+    75% {
+        transform: rotateZ(-5deg);
+
+    }
+
+    100% {
+        transform: rotateZ(0deg);
+    }
+}

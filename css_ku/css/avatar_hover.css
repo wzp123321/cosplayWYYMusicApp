@@ -10,11 +10,20 @@
 }
 
 .avatar img:first-child:hover {
+    cursor: pointer;
     animation: avatar_scale 1s linear infinite forwards;
 }
 
 .avatar img:nth-child(2):hover {
+    cursor: pointer;
     animation: avatar_shake 200ms linear infinite forwards;
+}
+
+.rorate-content{
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000;
+    animation: rorate_content 4s linear infinite forwards;
 }
 
 /* 鼠标悬浮头像放大缩小 */
@@ -69,4 +78,83 @@
     100% {
         transform: rotateZ(0deg);
     }
+}
+
+@keyframes rorate_content{
+    0%{
+        transform: rotateY(0deg);
+    }
+    20%{
+        transform: rotateY(90deg);
+    }
+    40%{
+        transform: rotateY(180deg);
+    }
+    60%{
+        transform: rotateY(270deg);
+    }
+    80%{
+        transform: rotateY(360deg);
+    }
+    100%{
+        transform: rotateY(0deg);
+    }
+}
+
+
+.haorooms-dot {
+    width:20px;
+    height:20px;
+  -webkit-animation: xAxis 4s infinite ease-in;;
+  animation: xAxis 4s infinite ease-in;
+    position:relative;
+
+}
+
+.haorooms-dot::after {
+  content: 'haorooms';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: #fff;
+  -webkit-animation: yAxis 2.5s infinite ease-out;
+  animation: yAxis 2.5s infinite ease-out;
+    position:absolute;
+}
+
+@-webkit-keyframes yAxis {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes yAxis {
+  50% {
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function:ease-out;
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+  }
+}
+
+@-webkit-keyframes xAxis {
+  50% {
+    -webkit-animation-timing-function:ease-in;
+    animation-timing-function: ease-in;
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
+}
+
+@keyframes xAxis {
+  50% {
+    -webkit-animation-timing-function:ease-in;
+    animation-timing-function: ease-in;
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+  }
 }
